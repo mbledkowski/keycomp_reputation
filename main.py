@@ -82,5 +82,5 @@ with psycopg.connect(
       cur.execute("""
       INSERT INTO reputation(authorid, "twitterFollowers", "redditKarma", score, software)
       VALUES ({authorid}, {tF}, {rK}, {score}, '{soft}');
-      """.format(authorid=i[0][0], tF="NULL" if x==-1 else x, rK="NULL" if y==-1 else y, score=((x/(x+256))+2*(y/(y+2048)))/3, soft = f"mbledkowski/keycomp_reputation {sorted(repo.tags, key=lambda t: t.commit.committed_datetime)[-1]} {repo.head.object.hexsha[0:7]}"
+      """.format(authorid=i[0][0], tF="NULL" if x==-1 else x, rK="NULL" if y==-1 else y, score=round(((x/(x+256))+2*(y/(y+2048)))/3, 12), soft = f"mbledkowski/keycomp_reputation {sorted(repo.tags, key=lambda t: t.commit.committed_datetime)[-1]} {repo.head.object.hexsha[0:7]}"
 ))
